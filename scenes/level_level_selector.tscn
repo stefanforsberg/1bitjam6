@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dprauo3rr65n1"]
+
+[ext_resource type="Texture2D" uid="uid://dvxfirdbaqdlm" path="res://images/level_select_bg.png" id="1_846kg"]
+[ext_resource type="Script" uid="uid://bx233iw5g5uug" path="res://scenes/level_level_selector.gd" id="1_qn2bg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qn2bg"]
+size = Vector2(102, 102)
+
+[node name="LevelLevelSelector" type="Node2D"]
+script = ExtResource("1_qn2bg")
+
+[node name="SelectArea" type="Area2D" parent="."]
+position = Vector2(0, 76)
+
+[node name="SelectBg" type="Sprite2D" parent="SelectArea"]
+position = Vector2(7.62939e-06, -74)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("1_846kg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectArea"]
+position = Vector2(0, -74)
+shape = SubResource("RectangleShape2D_qn2bg")
+
+[connection signal="input_event" from="SelectArea" to="." method="_on_select_area_input_event"]

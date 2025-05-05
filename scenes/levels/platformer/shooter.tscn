@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5c6msuvctu4l"]
+
+[ext_resource type="Script" uid="uid://de7u85q0oxy2p" path="res://scenes/levels/platformer/shooter.gd" id="1_5fjsu"]
+
+[node name="Shooter" type="Node2D"]
+script = ExtResource("1_5fjsu")
+
+[node name="Bullets" type="Node" parent="."]

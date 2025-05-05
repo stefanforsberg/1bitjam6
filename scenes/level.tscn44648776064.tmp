@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6rova6micwq8"]
+
+[ext_resource type="Script" uid="uid://dt3vst28131ab" path="res://scenes/level.gd" id="1_2q6dc"]
+[ext_resource type="Texture2D" uid="uid://bjr25isa6jets" path="res://images/level_select_inactive.png" id="2_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://biwjmiisnqjwo" path="res://scenes/level_arrow.tscn" id="2_w7c3h"]
+[ext_resource type="Texture2D" uid="uid://dvxfirdbaqdlm" path="res://images/level_select_bg.png" id="2_w8frs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_2q6dc")
+
+[node name="BgLocked" type="Sprite2D" parent="."]
+position = Vector2(40, 40)
+texture = ExtResource("2_mx8sn")
+
+[node name="BgUnlocked" type="Sprite2D" parent="."]
+texture = ExtResource("2_w8frs")
+offset = Vector2(40, 40)
+
+[node name="Arrows" type="Node2D" parent="."]
+
+[node name="LevelLeft" parent="Arrows" instance=ExtResource("2_w7c3h")]
+visible = false
+position = Vector2(21, 39)
+rotation = -3.14159
+
+[node name="LevelRight" parent="Arrows" instance=ExtResource("2_w7c3h")]
+visible = false
+position = Vector2(63, 39)
+
+[node name="LevelDown" parent="Arrows" instance=ExtResource("2_w7c3h")]
+visible = false
+position = Vector2(42, 62)
+rotation = 1.5708
+
+[node name="LevelUp" parent="Arrows" instance=ExtResource("2_w7c3h")]
+visible = false
+position = Vector2(42, 19)
+rotation = -1.5708
+
+[node name="ActivationArea" type="Area2D" parent="."]
+position = Vector2(-8, -10)
+
+[node name="Activation" type="ColorRect" parent="ActivationArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivationArea"]
+position = Vector2(50, 50)
+shape = SubResource("RectangleShape2D_w7c3h")
+
+[connection signal="clicked" from="Arrows/LevelLeft" to="." method="_on_level_left_clicked"]
+[connection signal="clicked" from="Arrows/LevelRight" to="." method="_on_level_right_clicked"]
+[connection signal="clicked" from="Arrows/LevelDown" to="." method="_on_level_down_clicked"]
+[connection signal="clicked" from="Arrows/LevelUp" to="." method="_on_level_up_clicked"]
+[connection signal="mouse_entered" from="ActivationArea" to="." method="_on_activation_area_mouse_entered"]
+[connection signal="mouse_exited" from="ActivationArea" to="." method="_on_activation_area_mouse_exited"]

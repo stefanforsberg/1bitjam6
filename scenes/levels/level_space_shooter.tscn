@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckig6k4tdgwqi"]
+
+[ext_resource type="Script" uid="uid://bg0oyuoyn6801" path="res://scenes/levels/level_space_shooter.gd" id="1_8q6cx"]
+[ext_resource type="Script" uid="uid://7ttjnb4m5fyx" path="res://scenes/levels/player_ship.gd" id="2_y7v6f"]
+
+[sub_resource type="Curve" id="Curve_grxbt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eunvi"]
+curve = SubResource("Curve_grxbt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8q6cx"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.241
+spread = 0.0
+gravity = Vector3(0, 98, 0)
+radial_accel_min = 5.0
+radial_accel_max = 15.0
+damping_min = 30.969
+damping_max = 54.046
+scale_max = 13.0
+scale_curve = SubResource("CurveTexture_eunvi")
+color = Color(0.964706, 0.447059, 0.501961, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5oacn"]
+radius = 16.0
+height = 36.0
+
+[node name="LevelSpaceShooter" type="Node2D"]
+script = ExtResource("1_8q6cx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 500.0
+offset_bottom = 500.0
+color = Color(0.141862, 0.260082, 0.359842, 1)
+
+[node name="PlayerShip" type="CharacterBody2D" parent="."]
+position = Vector2(265, 233)
+script = ExtResource("2_y7v6f")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerShip"]
+position = Vector2(-12, 0)
+rotation = 1.5708
+emitting = false
+amount = 50
+lifetime = 0.64
+preprocess = 1.83
+randomness = 0.18
+process_material = SubResource("ParticleProcessMaterial_8q6cx")
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayerShip"]
+position = Vector2(-1, -2)
+color = Color(0.964706, 0.447059, 0.501961, 1)
+polygon = PackedVector2Array(-12, 17, 22.0022, 2.95299, -11.5477, -14.2344)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerShip"]
+position = Vector2(-1, -1)
+shape = SubResource("CapsuleShape2D_5oacn")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.964706, 0.447059, 0.501961, 1)
+polygon = PackedVector2Array(-19, 510, 110, 515, 34, 454, 117, 402, 37, 353, 113, 297, 55, 257, 110, 223, 63, 176, 134, 140, 71, 70, 222, 27, 355, 12, 405, 103, 455, 79, 442, 219, 469, 365, 435, 441, 436, 525, 543, 529, 544, -42, -47, -16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(250, 250)

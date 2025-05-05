@@ -1,0 +1,153 @@
+[gd_scene load_steps=9 format=3 uid="uid://chif577v8wmj"]
+
+[ext_resource type="Texture2D" uid="uid://bng4qxd8o8qa4" path="res://images/notes.png" id="1_1lxv7"]
+[ext_resource type="Texture2D" uid="uid://cem6aovpxlwmx" path="res://images/level_select_arrow_selectable.png" id="1_78xve"]
+[ext_resource type="Script" uid="uid://nl4mee3ad6vo" path="res://scenes/levels/level_intro.gd" id="1_s80sv"]
+[ext_resource type="Texture2D" uid="uid://cg57cep1he5dv" path="res://images/level_select_arrow.png" id="3_vuh7p"]
+[ext_resource type="Texture2D" uid="uid://bjr25isa6jets" path="res://images/level_select_inactive.png" id="5_p0mwr"]
+[ext_resource type="Texture2D" uid="uid://dvxfirdbaqdlm" path="res://images/level_select_bg.png" id="6_jj2m6"]
+[ext_resource type="Texture2D" uid="uid://ch8rwi2mkmsar" path="res://images/level_select_active.png" id="7_pjh7m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s80sv"]
+size = Vector2(501, 29)
+
+[node name="LevelIntro" type="Node2D"]
+script = ExtResource("1_s80sv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 508.0
+offset_bottom = 499.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 26.0
+offset_top = 13.0
+offset_right = 479.0
+offset_bottom = 168.0
+theme_override_font_sizes/normal_font_size = 10
+text = "Dear Esteban.
+
+i wish i had more time to explain.
+The colors are gone. time is an arrow.
+time is money.
+
+stuck in a loop. reach exit to break free. Finish what I couldn't. notes are scattered. they can offer help."
+
+[node name="Notes" type="Sprite2D" parent="."]
+position = Vector2(83, 263)
+texture = ExtResource("1_1lxv7")
+
+[node name="LevelSelectArrowSelectable" type="Sprite2D" parent="Notes"]
+position = Vector2(-9, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("1_78xve")
+
+[node name="Label" type="Label" parent="Notes"]
+offset_left = -58.0
+offset_top = -20.0
+offset_right = 61.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 5
+text = "selectable path
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Notes"]
+offset_left = -61.0
+offset_top = -64.0
+offset_right = 62.0
+offset_bottom = -45.0
+theme_override_font_sizes/font_size = 10
+text = "Note #04"
+horizontal_alignment = 1
+
+[node name="LevelSelectArrow" type="Sprite2D" parent="Notes"]
+position = Vector2(-1, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("3_vuh7p")
+
+[node name="Label3" type="Label" parent="Notes"]
+offset_left = -60.0
+offset_top = 36.0
+offset_right = 61.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 5
+text = "selected path"
+horizontal_alignment = 1
+
+[node name="Notes2" type="Sprite2D" parent="."]
+position = Vector2(363, 276)
+texture = ExtResource("1_1lxv7")
+
+[node name="Label" type="Label" parent="Notes2"]
+offset_left = -60.0
+offset_top = -61.0
+offset_right = 62.0
+offset_bottom = -42.0
+theme_override_font_sizes/font_size = 10
+text = "Note # 03"
+horizontal_alignment = 1
+
+[node name="LevelSelectInactive" type="Sprite2D" parent="Notes2"]
+position = Vector2(-39, -25)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_p0mwr")
+
+[node name="LevelSelectBg" type="Sprite2D" parent="Notes2"]
+position = Vector2(-39, 56)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_jj2m6")
+
+[node name="Label2" type="Label" parent="Notes2"]
+offset_left = -19.0
+offset_top = 47.0
+offset_right = 56.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 5
+text = "completed
+level"
+
+[node name="Label3" type="Label" parent="Notes2"]
+offset_left = -19.0
+offset_top = 6.0
+offset_right = 56.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 5
+text = "Selectable
+level"
+
+[node name="Label4" type="Label" parent="Notes2"]
+offset_left = -19.0
+offset_top = -35.0
+offset_right = 56.0
+offset_bottom = -14.0
+theme_override_font_sizes/font_size = 5
+text = "inactive
+level"
+
+[node name="LevelSelectActive" type="Sprite2D" parent="Notes2"]
+position = Vector2(-39, 15)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_pjh7m")
+
+[node name="Start" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Start"]
+position = Vector2(249.5, 470.5)
+shape = SubResource("RectangleShape2D_s80sv")
+
+[node name="Label" type="Label" parent="Start"]
+offset_left = 3.0
+offset_top = 457.0
+offset_right = 497.0
+offset_bottom = 481.0
+theme_override_font_sizes/font_size = 20
+text = "Start your journey"
+horizontal_alignment = 1
+
+[connection signal="input_event" from="Start" to="." method="_on_start_input_event"]
+[connection signal="mouse_entered" from="Start" to="." method="_on_start_mouse_entered"]
+[connection signal="mouse_exited" from="Start" to="." method="_on_start_mouse_exited"]

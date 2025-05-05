@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://biwjmiisnqjwo"]
+
+[ext_resource type="Script" uid="uid://cn6d52pqox0t7" path="res://scenes/level_arrow.gd" id="1_ijyeq"]
+[ext_resource type="Texture2D" uid="uid://cem6aovpxlwmx" path="res://images/level_select_arrow_selectable.png" id="2_v2p7y"]
+[ext_resource type="Texture2D" uid="uid://cg57cep1he5dv" path="res://images/level_select_arrow.png" id="2_xg8p8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4aqs"]
+size = Vector2(14, 10)
+
+[node name="LevelArrow" type="Node2D"]
+script = ExtResource("1_ijyeq")
+
+[node name="Arrow" type="Area2D" parent="."]
+
+[node name="Selectable" type="Sprite2D" parent="Arrow"]
+texture = ExtResource("2_v2p7y")
+
+[node name="Selected" type="Sprite2D" parent="Arrow"]
+visible = false
+texture = ExtResource("2_xg8p8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_n4aqs")
+
+[connection signal="input_event" from="Arrow" to="." method="_on_arrow_input_event"]
+[connection signal="mouse_entered" from="Arrow" to="." method="_on_arrow_mouse_entered"]
+[connection signal="mouse_exited" from="Arrow" to="." method="_on_arrow_mouse_exited"]
