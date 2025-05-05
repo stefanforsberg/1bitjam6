@@ -1,8 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5c6msuvctu4l"]
+[gd_scene load_steps=4 format=3 uid="uid://c5c6msuvctu4l"]
 
 [ext_resource type="Script" uid="uid://de7u85q0oxy2p" path="res://scenes/levels/platformer/shooter.gd" id="1_5fjsu"]
+[ext_resource type="Texture2D" uid="uid://ct3i1un0212db" path="res://images/platformer_gun.png" id="2_t8si5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t8si5"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_max = 9.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
 
 [node name="Shooter" type="Node2D"]
 script = ExtResource("1_5fjsu")
 
 [node name="Bullets" type="Node" parent="."]
+
+[node name="PlatformerGun" type="Sprite2D" parent="."]
+texture = ExtResource("2_t8si5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 4)
+emitting = false
+amount = 20
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.32
+process_material = SubResource("ParticleProcessMaterial_t8si5")

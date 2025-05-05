@@ -8,6 +8,7 @@ var power = -1
 var aiming = false
 var shooting = false
 var shoot_timer = 0
+var dontSpawnHere = Rect2(Vector2(210, 0), Vector2(290, 100))
 
 func _ready():
 	
@@ -17,13 +18,30 @@ func _ready():
 	
 	for x in range(0,3):
 		
-		if Startup.level_event_probability(y):
+		var c = COIN.instantiate()
+		c.scale *= 2
 		
-			var c = COIN.instantiate()
-			c.scale *= 2
-			c.position.x = randi_range(40, 460)
-			c.position.y = randi_range(100, 460)
-			self.add_child(c)
+		var xPos = randi_range(40, 480)
+		var yPos = randi_range(40, 480)
+		
+		while(dontSpawnHere.has_point(Vector2(xPos, yPos))):
+			xPos = randi_range(40, 480)
+			yPos = randi_range(40, 480)
+		
+		c.position.x = xPos
+		c.position.y = yPos
+		
+		if Startup.level_event_probability(y):
+			c.minRng = 0
+			c.maxRng = 3
+		else:
+			c.minRng = 4
+			c.maxRng = 7
+			
+			
+		print("adding child", c)
+		print("adding child", c.type)
+		self.add_child(c)
 
 func _process(delta):
 	
@@ -50,6 +68,8 @@ func _process(delta):
 
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
+	if shooting: return
+		
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed('Click'):
 			if power != 0:

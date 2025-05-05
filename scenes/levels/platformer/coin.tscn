@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0sbi12r1vvpy"]
+[gd_scene load_steps=6 format=3 uid="uid://b0sbi12r1vvpy"]
 
 [ext_resource type="Texture2D" uid="uid://dpuqfbsrbmbfc" path="res://images/platformer_coin.png" id="1_4nvax"]
 [ext_resource type="Script" uid="uid://dpjqm13i11kqn" path="res://scenes/levels/platformer/coin.gd" id="1_hwtin"]
 [ext_resource type="Texture2D" uid="uid://b3ji2nflufl1m" path="res://images/collect_arrow.png" id="3_pggyu"]
+[ext_resource type="Texture2D" uid="uid://b6aaeal31m25q" path="res://images/collect_arrow_inverse.png" id="4_55rph"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwtin"]
 radius = 7.07107
@@ -39,5 +40,24 @@ texture = ExtResource("3_pggyu")
 visible = false
 rotation = 1.5708
 texture = ExtResource("3_pggyu")
+
+[node name="UpArrowInverse" type="Sprite2D" parent="Area2D"]
+visible = false
+texture = ExtResource("4_55rph")
+
+[node name="DownArrowInverse" type="Sprite2D" parent="Area2D"]
+visible = false
+rotation = -3.14159
+texture = ExtResource("4_55rph")
+
+[node name="LeftArrowInverse" type="Sprite2D" parent="Area2D"]
+visible = false
+rotation = -1.5708
+texture = ExtResource("4_55rph")
+
+[node name="RightArrowInverse" type="Sprite2D" parent="Area2D"]
+visible = false
+rotation = 1.5708
+texture = ExtResource("4_55rph")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

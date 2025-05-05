@@ -88,22 +88,27 @@ position = Vector2(0, 3)
 
 [node name="ColorRect" type="ColorRect" parent="LevelSelector"]
 offset_right = 500.0
-offset_bottom = 178.0
+offset_bottom = 133.0
 mouse_filter = 2
 
+[node name="ColorRect2" type="ColorRect" parent="LevelSelector"]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 497.0
+offset_bottom = 130.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="LevelLevelSelectorA" parent="LevelSelector" instance=ExtResource("2_p0wlc")]
-position = Vector2(66, 109)
-id = "A"
+position = Vector2(72, 62)
 
 [node name="LevelLevelSelectorB" parent="LevelSelector" instance=ExtResource("2_p0wlc")]
-position = Vector2(187, 109)
-id = "B"
+position = Vector2(419, 62)
 
 [node name="Label" type="Label" parent="LevelSelector"]
-offset_top = 23.0
+offset_top = 33.0
 offset_right = 499.0
-offset_bottom = 42.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_bottom = 52.0
 theme_override_font_sizes/font_size = 10
 text = "Select level"
 horizontal_alignment = 1

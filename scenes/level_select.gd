@@ -7,6 +7,8 @@ extends Node2D
 @onready var down_arrow_amount = $Inventory/DownArrowAmount
 @onready var left_arrow_amount = $Inventory/LeftArrowAmount
 @onready var up_arrow_amount = $Inventory/UpArrowAmount
+@onready var level_level_selector_a = $LevelSelector/LevelLevelSelectorA
+@onready var level_level_selector_b = $LevelSelector/LevelLevelSelectorB
 
 var lastX: int
 var lastY: int
@@ -53,6 +55,25 @@ func _on_level_start(x,y):
 		levelStart = load("res://scenes/levels/level_intro.tscn").instantiate()
 	else:
 		if not level_selector.visible:
+			
+			var levelOptions = ["platformer","pinball"]
+			
+			var minIndex = 0
+			var maxIndex = 0
+			
+			var levelIndex = randi_range(0,levelOptions.size()-1)
+			level_level_selector_a.type = levelOptions[levelIndex]
+			
+			levelOptions.remove_at(levelIndex)
+			
+			print(levelOptions)
+			
+			levelIndex = randi_range(0, levelOptions.size()-1)
+			level_level_selector_b.type = levelOptions[levelIndex]
+			
+			level_level_selector_a.updateType()
+			level_level_selector_b.updateType()
+			
 			if y == 0:
 				level_selector.position.y = 200
 				
@@ -61,32 +82,27 @@ func _on_level_start(x,y):
 
 		var res = await Startup.level_selected
 		
+		print("after selected", res)
+		
 		level_selector.visible = false
 		
-		  # 1) Load & instance the level
-		
-		if res == "A":
+		if res == "pinball":
 			levelStart = load("res://scenes/levels/level_test.tscn").instantiate()
-		elif res == "B":
+		elif res == "platformer":
 			levelStart = load("res://scenes/levels/level_platformer_avoid_obstacles.tscn").instantiate()
-		# 2) Make it run even when the Tree is paused:
 	levelStart.process_mode  = Node.PROCESS_MODE_ALWAYS
 	levelStart.x = x
 	levelStart.y = y
 	Startup.current_running_level = levelStart
 
-	# 3) Add it as a child of the SceneTree root (so it draws/receives input on top)
 	get_tree().root.add_child(levelStart)
-	# 4) Pause the whole tree – this stops your LevelSelect (and any STOP-mode nodes)
 	get_tree().paused = true
 	
 	PhysicsServer2D.set_active(true)
 
-	# (Optionally keep a reference so you can free it when done)
-	#self.current_level = level
-
 func _on_level_completed():
 	print("done")
+	print(Startup.current_running_level)
 	var x = Startup.current_running_level.x
 	var y = Startup.current_running_level.y
 	Startup.level_arr[y][x].completed = true
@@ -96,8 +112,8 @@ func _on_level_completed():
 
 
 func _on_level_level_selector_a_clicked():
-	Startup.level_selected.emit("A")
+	Startup.level_selected.emit(level_level_selector_a.type)
 
 
 func _on_level_level_selector_b_clicked():
-	Startup.level_selected.emit("B")
+	Startup.level_selected.emit(level_level_selector_b.type)

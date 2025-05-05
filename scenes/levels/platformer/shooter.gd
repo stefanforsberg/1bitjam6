@@ -3,9 +3,11 @@ extends Node2D
 @export var angleMin: int
 @export var angleMax: int
 @export var speed: int = 100
-
+@export var timeOut: float = 3.0
 
 @onready var bullets = $Bullets
+@onready var gpu_particles_2d = $GPUParticles2D
+
 
 const BULLET = preload("res://scenes/levels/platformer/bullet.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +26,12 @@ func newBullet():
 	
 	
 	
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(timeOut-1).timeout
+	
+	gpu_particles_2d.restart()
+	
+	await get_tree().create_timer(1).timeout
+	
 	newBullet()
 	
 
