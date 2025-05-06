@@ -1,8 +1,8 @@
 extends LevelBase
 @onready var bumper_1 = $Bumper1
 
-@onready var rigid_body_2d = $RigidBody2D
-@onready var aim:Line2D = $RigidBody2D/Aim
+@onready var rigid_body_2d = $Pinball
+@onready var aim:Line2D = $Pinball/Aim
 const COIN = preload("res://scenes/levels/platformer/coin.tscn")
 var power = -1
 var aiming = false
@@ -11,6 +11,7 @@ var shoot_timer = 0
 var dontSpawnHere = Rect2(Vector2(210, 0), Vector2(290, 100))
 
 func _ready():
+	super()
 	
 	if y <= 1: 
 		bumper_1.visible = false
@@ -38,9 +39,6 @@ func _ready():
 			c.minRng = 4
 			c.maxRng = 7
 			
-			
-		print("adding child", c)
-		print("adding child", c.type)
 		self.add_child(c)
 
 func _process(delta):

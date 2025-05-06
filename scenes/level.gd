@@ -21,15 +21,16 @@ class_name Level
 var hover = false
 
 func _ready():
-	var r = randi_range(0, 3)
-	print(r)
-	bg_inactive.rotation_degrees = [2, 88, 182, 268][randi_range(0, 3)]
-	
+
+	bg_inactive.rotation_degrees = [2, 88, 182, 268].pick_random()
 	update()
-	
-		
 			
 func update():
+	
+	if randf() > 0.7:
+		var tw = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT) 
+		tw.tween_property(bg_inactive, "rotation_degrees", [2, 88, 182, 268].pick_random(), 1.3)
+	
 	bg_inactive.visible = true
 	bg_unlocked.visible = false
 	bg_completed.visible = false

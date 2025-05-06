@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://iin17tma74d8"]
+
+[ext_resource type="Script" uid="uid://dvv7pxjmk05b3" path="res://scenes/times_up.gd" id="1_qrsyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jh3i"]
+size = Vector2(514, 515)
+
+[node name="TimesUp" type="Node2D"]
+script = ExtResource("1_qrsyg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 500.0
+offset_bottom = 500.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 203.0
+offset_right = 498.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 40
+text = "time is up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 273.0
+offset_right = 499.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 10
+text = "click anywhere to restart"
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(247, 247.5)
+shape = SubResource("RectangleShape2D_6jh3i")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

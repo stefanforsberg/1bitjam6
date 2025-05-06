@@ -1,14 +1,17 @@
 extends Node
 class_name LevelBase
-
+const STOP_WATCH = preload("res://scenes/stop_watch.tscn")
 var x: int
 var y: int
+var time_limit: int
+var stopwatch
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	stopwatch = STOP_WATCH.instantiate()
+	add_child(stopwatch)
+	print("startin sw", time_limit)
+	stopwatch.set_limit(time_limit)
+	stopwatch.start()
+	
 func _process(delta):
 	pass
