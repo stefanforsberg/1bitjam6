@@ -11,7 +11,7 @@ func _process(delta):
 	pass
 
 
-func _on_start_input_event(viewport, event, shape_idx):
+func _on_start_input_event(_viewport, event, _shape_idx):
 	
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed('Click'):

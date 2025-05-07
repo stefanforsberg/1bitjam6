@@ -12,6 +12,3 @@ func _ready():
 	print("startin sw", time_limit)
 	stopwatch.set_limit(time_limit)
 	stopwatch.start()
-	
-func _process(delta):
-	pass

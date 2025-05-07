@@ -35,7 +35,6 @@ offset_bottom = 43.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "05"
-metadata/_edit_lock_ = true
 
 [node name="DownArrowAmount" type="Label" parent="Inventory"]
 offset_left = 350.0
@@ -45,7 +44,6 @@ offset_bottom = 43.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "00"
-metadata/_edit_lock_ = true
 
 [node name="LeftArrowAmount" type="Label" parent="Inventory"]
 offset_left = 221.0
@@ -55,7 +53,6 @@ offset_bottom = 43.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "00"
-metadata/_edit_lock_ = true
 
 [node name="UpArrowAmount" type="Label" parent="Inventory"]
 offset_left = 415.0
@@ -65,30 +62,25 @@ offset_bottom = 43.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
 text = "00"
-metadata/_edit_lock_ = true
 
 [node name="RightArrow" type="Sprite2D" parent="Inventory"]
 position = Vector2(277, 25)
 texture = ExtResource("3_2epne")
-metadata/_edit_lock_ = true
 
 [node name="DownArrow" type="Sprite2D" parent="Inventory"]
 position = Vector2(342, 24)
 rotation = 1.5708
 texture = ExtResource("3_2epne")
-metadata/_edit_lock_ = true
 
 [node name="LeftArrow" type="Sprite2D" parent="Inventory"]
 position = Vector2(213, 25)
 rotation = 3.14159
 texture = ExtResource("3_2epne")
-metadata/_edit_lock_ = true
 
 [node name="UpArrow" type="Sprite2D" parent="Inventory"]
 position = Vector2(406, 26)
 rotation = -1.5708
 texture = ExtResource("3_2epne")
-metadata/_edit_lock_ = true
 
 [node name="LevelSelector" type="Node2D" parent="."]
 process_mode = 3

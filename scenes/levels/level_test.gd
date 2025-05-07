@@ -65,7 +65,7 @@ func _process(delta):
 	
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
+func _on_area_2d_input_event(viewport, event, _shape_idx):
 	if shooting: return
 		
 	if event is InputEventMouseButton:
