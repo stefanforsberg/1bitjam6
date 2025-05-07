@@ -1,5 +1,7 @@
 extends Node
 
+var saveGameUri = "user://savegame_v1.save"
+
 var save_data = {
 	"right_arrow_start": 1,
 	"down_arrow_start": 1,
@@ -11,6 +13,7 @@ var save_data = {
 	"down_arrow": 0,
 	"left_arrow": 0,
 	"up_arrow": 0,
+	"pinball_secret_found": false
 }
 
 var level_arr = []
@@ -23,10 +26,13 @@ signal level_selected(id: String)
 var current_running_level: LevelBase
 
 func _ready():
-	pass
+	loadGame()
+
 	
 func restart():
 	level_arr = []
+	
+	saveGame()
 	
 	save_data["time"] = save_data["time_start"]
 	save_data["right_arrow"] = save_data["right_arrow_start"]
@@ -37,3 +43,26 @@ func restart():
 func level_event_probability(y: int):
 	var probability := float(5 - y) / 4.0
 	return randf() < probability
+
+
+func loadGame():
+	if not FileAccess.file_exists(saveGameUri):
+		return
+
+	var file = FileAccess.open(saveGameUri, FileAccess.READ)
+	if not file:
+		return
+
+	var loaded_data = file.get_var(true)
+	
+	for key in loaded_data.keys():
+		save_data[key] = loaded_data[key]
+		
+	file.close()
+	
+func saveGame():
+	
+	var file = FileAccess.open(saveGameUri, FileAccess.WRITE)
+	file.store_var(save_data, true)
+	file.close()
+	

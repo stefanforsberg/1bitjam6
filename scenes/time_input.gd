@@ -9,9 +9,8 @@ func _ready():
 
 func updateLimits():
 	time = Startup.save_data["time"]
-	print("time_input ", time)
 	
-	line_edit.text = str(time / 2)
+	line_edit.text = str(time)
 
 func get_time():
 	return int(line_edit.text)

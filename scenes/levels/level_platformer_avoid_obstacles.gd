@@ -113,4 +113,10 @@ func _process(delta):
 
 func _on_exit_area_body_entered(body):
 	if body is CharacterBody2D:
+		
+		if body.position.y < 100:
+			Startup.save_data["time_start"] += 5
+		else:
+			Startup.save_data["time_start"] += 1
+		
 		Startup.level_completed.emit()

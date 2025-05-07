@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://rkonws072e6r"]
+
+[ext_resource type="Script" uid="uid://cfuf2hho5hp2b" path="res://scenes/levels/level_notes.gd" id="1_oelmv"]
+[ext_resource type="Texture2D" uid="uid://bng4qxd8o8qa4" path="res://images/notes.png" id="1_yxucl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2icqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oelmv"]
+size = Vector2(519, 39)
+
+[node name="LevelNotes" type="Node2D"]
+script = ExtResource("1_oelmv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 500.0
+offset_bottom = 500.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Notes" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2icqr")
+position = Vector2(249, 238)
+scale = Vector2(2, 2)
+texture = ExtResource("1_yxucl")
+
+[node name="Heading" type="Label" parent="."]
+offset_left = 138.0
+offset_top = 119.0
+offset_right = 360.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 20
+text = "Note #01"
+
+[node name="Body" type="Label" parent="."]
+offset_left = 138.0
+offset_top = 165.0
+offset_right = 366.0
+offset_bottom = 377.0
+theme_override_font_sizes/font_size = 10
+text = "Body"
+autowrap_mode = 2
+
+[node name="Exit" type="Area2D" parent="."]
+
+[node name="Label2" type="Label" parent="Exit"]
+offset_left = 3.0
+offset_top = 456.0
+offset_right = 498.0
+offset_bottom = 480.0
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(248, 470)
+shape = SubResource("RectangleShape2D_oelmv")
+
+[connection signal="input_event" from="Exit" to="." method="_on_exit_input_event"]
+[connection signal="mouse_entered" from="Exit" to="." method="_on_exit_mouse_entered"]
+[connection signal="mouse_exited" from="Exit" to="." method="_on_exit_mouse_exited"]

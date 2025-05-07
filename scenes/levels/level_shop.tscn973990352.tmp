@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://vfq12b6b7rk7"]
+[gd_scene load_steps=4 format=3 uid="uid://vfq12b6b7rk7"]
 
 [ext_resource type="Script" uid="uid://bj7ykb5wuhsw2" path="res://scenes/levels/shop.gd" id="1_b7qxd"]
 [ext_resource type="Texture2D" uid="uid://cg57cep1he5dv" path="res://images/level_select_arrow.png" id="2_y0epe"]
 [ext_resource type="PackedScene" uid="uid://oiene1ln3h8x" path="res://scenes/levels/shop/shop_item.tscn" id="3_226c2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_226c2"]
-size = Vector2(519, 39)
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_b7qxd")
@@ -85,26 +82,7 @@ texture = ExtResource("2_y0epe")
 position = Vector2(83, 241)
 
 [node name="ShopItem2" parent="." instance=ExtResource("3_226c2")]
-position = Vector2(249, 276)
+position = Vector2(249, 241)
 
 [node name="ShopItem3" parent="." instance=ExtResource("3_226c2")]
 position = Vector2(415, 241)
-
-[node name="Exit" type="Area2D" parent="."]
-
-[node name="Label2" type="Label" parent="Exit"]
-offset_left = 3.0
-offset_top = 456.0
-offset_right = 498.0
-offset_bottom = 480.0
-theme_override_font_sizes/font_size = 20
-text = "exit shop"
-horizontal_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
-position = Vector2(248, 470)
-shape = SubResource("RectangleShape2D_226c2")
-
-[connection signal="input_event" from="Exit" to="." method="_on_exit_input_event"]
-[connection signal="mouse_entered" from="Exit" to="." method="_on_exit_mouse_entered"]
-[connection signal="mouse_exited" from="Exit" to="." method="_on_exit_mouse_exited"]

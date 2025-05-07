@@ -27,9 +27,9 @@ func _ready():
 			
 func update():
 	
-	if randf() > 0.7:
-		var tw = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT) 
-		tw.tween_property(bg_inactive, "rotation_degrees", [2, 88, 182, 268].pick_random(), 1.3)
+	if randf() > 0.8:
+		var tw = create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT) 
+		tw.tween_property(bg_inactive, "rotation_degrees", [2, 88, 182, 268].pick_random(), 2.3)
 	
 	bg_inactive.visible = true
 	bg_unlocked.visible = false

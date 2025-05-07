@@ -3,6 +3,7 @@ extends Node2D
 @onready var platformer_door = $PlatformerDoor
 @onready var platformer_bullet = $PlatformerBullet
 @onready var platformer_shop = $PlatformerShop
+@onready var platformer_notes = $PlatformerNotes
 
 signal clicked()
 
@@ -10,10 +11,12 @@ func updateType():
 	platformer_door.visible = false
 	platformer_bullet.visible = false
 	platformer_shop.visible = false
+	platformer_notes.visible = false
 	
 	if type == "platformer": platformer_door.visible = true
 	elif type == "pinball": platformer_bullet.visible = true
 	elif type == "shop": platformer_shop.visible = true
+	elif type == "note": platformer_notes.visible = true
 
 func _on_select_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

@@ -36,8 +36,16 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_ue047")
 
 [node name="PlatformerShop" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 texture = ExtResource("5_ue047")
+
+[node name="PlatformerNotes" type="Line2D" parent="."]
+visible = false
+position = Vector2(3, 8)
+points = PackedVector2Array(-8, -19, 6, -19, 6, 2, -13, 2, -13, -16, -9, -19)
+closed = true
+width = 1.0
 
 [connection signal="input_event" from="SelectArea" to="." method="_on_select_area_input_event"]
 [connection signal="mouse_entered" from="SelectArea" to="." method="_on_select_area_mouse_entered"]

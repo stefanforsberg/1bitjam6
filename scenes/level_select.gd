@@ -80,7 +80,7 @@ func _on_level_start(x,y):
 	else:
 		if not level_selector.visible:
 			
-			var levelOptions = ["platformer","pinball","platformer","pinball","platformer","pinball", "pinball", "shop"]
+			var levelOptions = ["platformer","pinball","platformer","pinball","platformer","pinball", "pinball", "shop", "note"]
 			
 			var minIndex = 0
 			var maxIndex = 0
@@ -120,6 +120,8 @@ func _on_level_start(x,y):
 			levelStart = load("res://scenes/levels/level_platformer_avoid_obstacles.tscn").instantiate()
 		elif res == "shop":
 			levelStart = load("res://scenes/levels/level_shop.tscn").instantiate()
+		elif res == "note":
+			levelStart = load("res://scenes/levels/level_notes.tscn").instantiate()
 			
 	levelStart.process_mode  = Node.PROCESS_MODE_ALWAYS
 	levelStart.x = x
@@ -138,8 +140,6 @@ func _on_level_completed():
 	
 	if Startup.current_running_level.stopwatch:
 		Startup.save_data["time"] = max(0, Startup.save_data["time"] - Startup.current_running_level.stopwatch.get_elapsed())
-		
-
 
 		time_input.updateLimits()
 	
@@ -163,3 +163,17 @@ func _on_level_level_selector_a_clicked():
 
 func _on_level_level_selector_b_clicked():
 	Startup.level_selected.emit(level_level_selector_b.type)
+
+
+func _on_restart_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton:
+		if Input.is_action_just_pressed('Click'):
+			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+			
+			get_tree().change_scene_to_packed(TIMES_UP_SCENE)
+
+func _on_restart_mouse_entered():
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+
+func _on_restart_mouse_exited():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
