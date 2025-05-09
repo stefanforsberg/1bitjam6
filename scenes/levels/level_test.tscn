@@ -11,7 +11,7 @@ bounce = 0.64
 radius = 12.3693
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tfhr"]
-size = Vector2(15, 460)
+size = Vector2(15, 404)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h0hot"]
 size = Vector2(517, 15)
@@ -23,7 +23,7 @@ size = Vector2(532, 37.5)
 size = Vector2(214, 525)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqmi1"]
-size = Vector2(272.5, 10)
+size = Vector2(278.25, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8883n"]
 size = Vector2(20, 178.992)
@@ -44,7 +44,7 @@ size = Vector2(503, 527)
 size = Vector2(5, 49.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4lw2e"]
-size = Vector2(20, 45)
+size = Vector2(20, 101)
 
 [node name="LevelTest" type="Node2D"]
 script = ExtResource("1_h0hot")
@@ -95,7 +95,7 @@ width = 2.0
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-2.5, 220)
+position = Vector2(-2.5, 192)
 shape = SubResource("RectangleShape2D_8tfhr")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -111,7 +111,7 @@ position = Vector2(602, 258)
 shape = SubResource("RectangleShape2D_jp5fc")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-131, 501)
+position = Vector2(-128.125, 500.5)
 shape = SubResource("RectangleShape2D_bqmi1")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
@@ -199,12 +199,12 @@ default_color = Color(0, 0, 0, 1)
 [node name="BreakableWall" type="StaticBody2D" parent="AreaSecret"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSecret/BreakableWall"]
-position = Vector2(-5, 472.5)
+position = Vector2(-5, 444.5)
 shape = SubResource("RectangleShape2D_4lw2e")
 
 [node name="BrokenWall" type="ColorRect" parent="AreaSecret"]
 visible = false
-offset_top = 450.0
+offset_top = 394.0
 offset_right = 5.0
 offset_bottom = 495.0
 mouse_filter = 2
@@ -212,58 +212,50 @@ color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" parent="AreaSecret"]
 
-[node name="RightArrowAmount" type="Label" parent="AreaSecret/Node2D"]
-offset_left = -220.0
-offset_top = 198.0
-offset_right = -180.0
-offset_bottom = 223.0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 10
-text = "01"
-
-[node name="DownArrowAmount" type="Label" parent="AreaSecret/Node2D"]
-offset_left = -166.0
-offset_top = 198.0
-offset_right = -126.0
-offset_bottom = 223.0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 10
-text = "03"
-
 [node name="LeftArrowAmount" type="Label" parent="AreaSecret/Node2D"]
-offset_left = -276.0
-offset_top = 198.0
-offset_right = -236.0
-offset_bottom = 223.0
+offset_left = -278.0
+offset_top = 299.0
+offset_right = -50.0
+offset_bottom = 344.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 10
-text = "02"
-
-[node name="UpArrowAmount" type="Label" parent="AreaSecret/Node2D"]
-offset_left = -112.0
-offset_top = 198.0
-offset_right = -72.0
-offset_bottom = 223.0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 10
-text = "05"
+text = "ENTER THIS SEQUENCE
+IN THE PLACE WITH
+ROTATING BOXES TO
+OPEN FENCE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RightArrow" type="Sprite2D" parent="AreaSecret/Node2D"]
-position = Vector2(-231, 205)
+position = Vector2(-196, 384)
+texture = ExtResource("3_jp5fc")
+
+[node name="RightArrow2" type="Sprite2D" parent="AreaSecret/Node2D"]
+position = Vector2(-144, 384)
 texture = ExtResource("3_jp5fc")
 
 [node name="DownArrow" type="Sprite2D" parent="AreaSecret/Node2D"]
-position = Vector2(-174, 204)
+position = Vector2(-175, 383)
+rotation = 1.5708
+texture = ExtResource("3_jp5fc")
+
+[node name="DownArrow2" type="Sprite2D" parent="AreaSecret/Node2D"]
+position = Vector2(-159, 383)
+rotation = 1.5708
+texture = ExtResource("3_jp5fc")
+
+[node name="DownArrow3" type="Sprite2D" parent="AreaSecret/Node2D"]
+position = Vector2(-113, 383)
 rotation = 1.5708
 texture = ExtResource("3_jp5fc")
 
 [node name="LeftArrow" type="Sprite2D" parent="AreaSecret/Node2D"]
-position = Vector2(-284, 205)
+position = Vector2(-212, 384)
 rotation = 3.14159
 texture = ExtResource("3_jp5fc")
 
 [node name="UpArrow" type="Sprite2D" parent="AreaSecret/Node2D"]
-position = Vector2(-121, 206)
+position = Vector2(-128, 385)
 rotation = -1.5708
 texture = ExtResource("3_jp5fc")
 

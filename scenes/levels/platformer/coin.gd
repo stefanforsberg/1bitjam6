@@ -39,7 +39,9 @@ func reRoll():
 func _on_area_2d_body_entered(body):
 	
 	if body.name == "PlatformerAvoidObstaclesPlayer" or body.name == "Pinball":
-		print("pick up ", type)
+		
+		Sound.pickup.play()
+		
 		if type == 0: Startup.save_data["up_arrow"]+=1
 		if type == 1: Startup.save_data["down_arrow"]+=1
 		if type == 2: Startup.save_data["left_arrow"]+=1

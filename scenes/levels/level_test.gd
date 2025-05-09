@@ -52,8 +52,9 @@ func _ready():
 
 func _process(delta):
 	
-	if rigid_body_2d.position.x < 0:
+	if rigid_body_2d.position.x < 0 and camera_2d.position.x != -300:
 		camera_2d.position.x = -300
+		Sound.good_thing.play()
 	
 	if y > 2:
 		bumper_1.rotation += delta/2
@@ -102,9 +103,10 @@ func _on_area_secret_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed('Click'):
 			secret_area_clicked+=1
-			
+			Sound.hit.play()
 			if secret_area_clicked > 5:
 				Startup.save_data["pinball_secret_found"] = true
 				breakable_wall.queue_free()
 				broken_wall.visible = true
+				Sound.explode.play()
 				

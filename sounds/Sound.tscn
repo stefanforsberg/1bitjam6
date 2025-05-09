@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1tn6jpci45bd"]
+
+[ext_resource type="Script" uid="uid://bf7tbmdshd0ba" path="res://sounds/sound.gd" id="1_ykdpa"]
+[ext_resource type="AudioStream" uid="uid://co7xk6hlhewpl" path="res://sounds/select.wav" id="2_c25pg"]
+[ext_resource type="AudioStream" uid="uid://c0gv2n1cr5seo" path="res://sounds/jump.wav" id="3_5ba3r"]
+[ext_resource type="AudioStream" uid="uid://b5u0gqroeafn2" path="res://sounds/pickup.wav" id="4_nk7ms"]
+[ext_resource type="AudioStream" uid="uid://d3yuu3q4rm58p" path="res://sounds/shoot.wav" id="5_tj0dm"]
+[ext_resource type="AudioStream" uid="uid://cj3qbpbfrxvsg" path="res://sounds/explode.wav" id="6_qky7i"]
+[ext_resource type="AudioStream" uid="uid://cdvlnxb2tsvxu" path="res://sounds/hit.wav" id="7_jk010"]
+[ext_resource type="AudioStream" uid="uid://5ib5hgawph20" path="res://sounds/goodthing.wav" id="8_uy5lm"]
+
+[node name="Sound" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_ykdpa")
+
+[node name="Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_c25pg")
+volume_db = -5.096
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5ba3r")
+
+[node name="Pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nk7ms")
+
+[node name="Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_tj0dm")
+volume_db = -6.099
+
+[node name="Explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qky7i")
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jk010")
+
+[node name="GoodThing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_uy5lm")

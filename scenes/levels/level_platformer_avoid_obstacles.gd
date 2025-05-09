@@ -1,5 +1,8 @@
 extends LevelBase
 @onready var secret_message = $SecretMessage
+@onready var level_four_door = $LevelFourDoor
+@onready var time_input = $Computer/ComputerArea/TimeInput
+@onready var electricity_on = $Computer/ElectricityOn
 
 @onready var platformer_avoid_obstacles_player = $PlatformerAvoidObstaclesPlayer
 @onready var camera_2d = $Camera2D
@@ -15,6 +18,7 @@ extends LevelBase
 @onready var coin_5 = $Collectables/Coin5
 @onready var coin_6 = $Collectables/Coin6
 @onready var coin_7 = $Collectables/Coin7
+@onready var computer_area = $Computer/ComputerArea
 
 const message_arr = [
 	["P","A","S","S","W"],
@@ -25,7 +29,14 @@ const message_arr = [
 ]
 
 func _ready():
+	
 	super()
+	
+	time_input.setLimits()
+	time_input.validPassword.connect(_on_valid_password)
+	
+	if y == 4:
+		level_four_door.queue_free()
 	
 	secret_message.text = message_arr[y][x]
 	
@@ -120,3 +131,21 @@ func _on_exit_area_body_entered(body):
 			Startup.save_data["time_start"] += 1
 		
 		Startup.level_completed.emit()
+
+
+func _on_computer_area_detection_body_entered(body):
+	if electricity_on.visible: return
+	
+	if body is CharacterBody2D:
+		computer_area.visible = true		
+
+
+func _on_computer_area_detection_body_exited(body):
+	if electricity_on.visible: return
+	
+	if body is CharacterBody2D:
+		computer_area.visible = false
+
+func _on_valid_password():
+	electricity_on.visible = true
+	computer_area.visible = false

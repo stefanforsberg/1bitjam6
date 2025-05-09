@@ -35,6 +35,8 @@ func newBullet():
 	b.bounce_count = bounces
 	bullets.add_child(b)
 	
+	Sound.shoot.play()
+	
 	await get_tree().create_timer(timeOut-1).timeout
 	
 	gpu_particles_2d.restart()

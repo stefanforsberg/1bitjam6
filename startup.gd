@@ -2,19 +2,23 @@ extends Node
 
 var saveGameUri = "user://savegame_v1.save"
 
-var save_data = {
-	"right_arrow_start": 1,
-	"down_arrow_start": 1,
-	"left_arrow_start": 1,
-	"up_arrow_start": 1,
-	"time_start": 60,
-	"time": 0,
-	"right_arrow": 0,
-	"down_arrow": 0,
-	"left_arrow": 0,
-	"up_arrow": 0,
-	"pinball_secret_found": false
-}
+var save_data = getDefaultSaveData()
+
+func getDefaultSaveData():
+	return {
+		"right_arrow_start": 1,
+		"down_arrow_start": 1,
+		"left_arrow_start": 1,
+		"up_arrow_start": 1,
+		"time_start": 60,
+		"pinball_secret_found": false,
+		"fence_opened": false,
+		"time": 0,
+		"right_arrow": 0,
+		"down_arrow": 0,
+		"left_arrow": 0,
+		"up_arrow": 0,
+	}
 
 var level_arr = []
 signal level_start(x: int, y: int)
@@ -27,7 +31,6 @@ var current_running_level: LevelBase
 
 func _ready():
 	loadGame()
-
 	
 func restart():
 	level_arr = []
@@ -46,19 +49,26 @@ func level_event_probability(y: int):
 
 
 func loadGame():
+	
+	save_data = getDefaultSaveData()
+	
 	if not FileAccess.file_exists(saveGameUri):
 		return
-
+	
 	var file = FileAccess.open(saveGameUri, FileAccess.READ)
 	if not file:
 		return
-
+		
 	var loaded_data = file.get_var(true)
 	
 	for key in loaded_data.keys():
 		save_data[key] = loaded_data[key]
 		
 	file.close()
+	
+func resetGame():
+	DirAccess.remove_absolute(saveGameUri)
+	save_data = getDefaultSaveData()
 	
 func saveGame():
 	

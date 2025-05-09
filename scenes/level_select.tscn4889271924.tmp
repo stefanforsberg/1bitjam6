@@ -1,0 +1,144 @@
+[gd_scene load_steps=6 format=3 uid="uid://wtiydsor4gj8"]
+
+[ext_resource type="Script" uid="uid://baww3ujdmyku4" path="res://scenes/level_select.gd" id="1_3shnc"]
+[ext_resource type="PackedScene" uid="uid://dprauo3rr65n1" path="res://scenes/level_level_selector.tscn" id="2_p0wlc"]
+[ext_resource type="Texture2D" uid="uid://cg57cep1he5dv" path="res://images/level_select_arrow.png" id="3_2epne"]
+[ext_resource type="PackedScene" uid="uid://c08dsblwm4gst" path="res://scenes/time_input.tscn" id="4_rif6e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rif6e"]
+size = Vector2(115.5, 24)
+
+[node name="LevelSelect" type="Node2D"]
+script = ExtResource("1_3shnc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 500.0
+offset_bottom = 500.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelRender" type="Node2D" parent="."]
+
+[node name="Inventory" type="Node2D" parent="."]
+position = Vector2(49, -5)
+
+[node name="TimeAmount" type="Label" parent="Inventory"]
+offset_left = -34.0
+offset_top = 18.0
+offset_right = 62.0
+offset_bottom = 37.0
+theme_override_font_sizes/font_size = 10
+text = "Time: 60"
+
+[node name="RightArrowAmount" type="Label" parent="Inventory"]
+offset_left = 307.0
+offset_top = 18.0
+offset_right = 347.0
+offset_bottom = 43.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "05"
+
+[node name="DownArrowAmount" type="Label" parent="Inventory"]
+offset_left = 361.0
+offset_top = 18.0
+offset_right = 401.0
+offset_bottom = 43.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "00"
+
+[node name="LeftArrowAmount" type="Label" parent="Inventory"]
+offset_left = 251.0
+offset_top = 18.0
+offset_right = 291.0
+offset_bottom = 43.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "00"
+
+[node name="UpArrowAmount" type="Label" parent="Inventory"]
+offset_left = 415.0
+offset_top = 18.0
+offset_right = 455.0
+offset_bottom = 43.0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "00"
+
+[node name="RightArrow" type="Sprite2D" parent="Inventory"]
+position = Vector2(296, 25)
+texture = ExtResource("3_2epne")
+
+[node name="DownArrow" type="Sprite2D" parent="Inventory"]
+position = Vector2(353, 24)
+rotation = 1.5708
+texture = ExtResource("3_2epne")
+
+[node name="LeftArrow" type="Sprite2D" parent="Inventory"]
+position = Vector2(243, 25)
+rotation = 3.14159
+texture = ExtResource("3_2epne")
+
+[node name="UpArrow" type="Sprite2D" parent="Inventory"]
+position = Vector2(406, 26)
+rotation = -1.5708
+texture = ExtResource("3_2epne")
+
+[node name="LevelSelector" type="Node2D" parent="."]
+process_mode = 3
+visible = false
+position = Vector2(0, 185)
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelector"]
+offset_right = 500.0
+offset_bottom = 133.0
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="LevelSelector"]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 497.0
+offset_bottom = 130.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelLevelSelectorA" parent="LevelSelector" instance=ExtResource("2_p0wlc")]
+position = Vector2(72, 62)
+
+[node name="LevelLevelSelectorB" parent="LevelSelector" instance=ExtResource("2_p0wlc")]
+position = Vector2(419, 62)
+
+[node name="Label" type="Label" parent="LevelSelector"]
+offset_top = 33.0
+offset_right = 499.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 10
+text = "Select level"
+horizontal_alignment = 1
+
+[node name="TimeInput" parent="LevelSelector" instance=ExtResource("4_rif6e")]
+position = Vector2(200, 86)
+
+[node name="Restart" type="Area2D" parent="."]
+position = Vector2(-368, -133)
+
+[node name="Label" type="Label" parent="Restart"]
+offset_left = 487.0
+offset_top = 137.0
+offset_right = 603.0
+offset_bottom = 169.0
+theme_override_font_sizes/font_size = 10
+text = "| restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Restart"]
+position = Vector2(545.75, 152)
+shape = SubResource("RectangleShape2D_rif6e")
+
+[connection signal="clicked" from="LevelSelector/LevelLevelSelectorA" to="." method="_on_level_level_selector_a_clicked"]
+[connection signal="clicked" from="LevelSelector/LevelLevelSelectorB" to="." method="_on_level_level_selector_b_clicked"]
+[connection signal="input_event" from="Restart" to="." method="_on_restart_input_event"]
+[connection signal="mouse_entered" from="Restart" to="." method="_on_restart_mouse_entered"]
+[connection signal="mouse_exited" from="Restart" to="." method="_on_restart_mouse_exited"]

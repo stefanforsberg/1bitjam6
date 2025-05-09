@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6rova6micwq8"]
+[gd_scene load_steps=10 format=3 uid="uid://b6rova6micwq8"]
 
 [ext_resource type="Script" uid="uid://dt3vst28131ab" path="res://scenes/level.gd" id="1_2q6dc"]
 [ext_resource type="Texture2D" uid="uid://bjr25isa6jets" path="res://images/level_select_inactive.png" id="2_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://biwjmiisnqjwo" path="res://scenes/level_arrow.tscn" id="2_w7c3h"]
 [ext_resource type="Texture2D" uid="uid://dvxfirdbaqdlm" path="res://images/level_select_bg.png" id="2_w8frs"]
 [ext_resource type="Texture2D" uid="uid://ch8rwi2mkmsar" path="res://images/level_select_active.png" id="3_ppgk2"]
+[ext_resource type="Shader" uid="uid://dor4l4u17bg0a" path="res://plasma.gdshader" id="5_klq6b"]
 [ext_resource type="Texture2D" uid="uid://bd2h7b4tbpkv" path="res://images/level_completed.png" id="6_2r41h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b121j"]
+shader = ExtResource("5_klq6b")
+shader_parameter/scale = 3.321
+shader_parameter/speed = 0.578
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7c3h"]
 
@@ -23,6 +29,15 @@ texture = ExtResource("3_ppgk2")
 [node name="BgCompleted" type="Sprite2D" parent="."]
 texture = ExtResource("2_w8frs")
 offset = Vector2(40, 40)
+
+[node name="BgExit" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_b121j")
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 75.0
+offset_bottom = 75.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Arrows" type="Node2D" parent="."]
 

@@ -2,8 +2,9 @@ extends LevelBase
 @onready var heading = $Heading
 @onready var body = $Body
 
+
+
 var arr = [
-	["Note #1","THE REAL EXIT IS IN A PLACE WHERE SAD SQUARES FIRE AT YOU."],
 	["Note #2","YOU CAN CHOOSE THE MAX TIME YOU WANT TO SPEND BEFORE STARTING A LEVEL."],
 	["Note #4","A WALL LOOKS WEAK IN LOWER LEFT CORNER OF PINBALL LEVEL. COULD POINTY DEVICE HELP BREAK IT?"],
 	["Note #6","I MUST HAVE DROPPED NOTE #5 SOMEWHERE ON THE WAY."],
@@ -22,6 +23,9 @@ func _ready():
 	
 	super()
 
+func setManual():
+	heading.text = "Note #1"
+	body.text = "THE REAL EXIT IS IN A PLACE WHERE SAD SQUARES FIRE AT YOU."
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

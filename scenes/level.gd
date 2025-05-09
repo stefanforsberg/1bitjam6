@@ -9,6 +9,7 @@ class_name Level
 @onready var bg_inactive = $BgInactive
 @onready var bg_unlocked = $BgUnlocked
 @onready var bg_completed = $BgCompleted
+@onready var bg_exit = $BgExit
 
 @onready var arrows = $Arrows
 @onready var activation_area = $ActivationArea
@@ -34,9 +35,14 @@ func update():
 	bg_inactive.visible = true
 	bg_unlocked.visible = false
 	bg_completed.visible = false
+	bg_exit.visible = false
 	
 	arrows.visible = false
 	activation_area.visible = false
+	
+	
+	if y == 4 and x == 4:
+		bg_exit.visible = true
 	
 	if unlocked:
 		bg_inactive.visible = false
@@ -50,6 +56,8 @@ func update():
 		level_right.visible = false
 		level_down.visible = false
 		level_up.visible = false
+		
+			
 		
 		if completed:
 			

@@ -18,6 +18,8 @@ const level_scene = preload("res://scenes/level.tscn")
 var lastX: int
 var lastY: int
 
+var current_string = ""
+
 func _ready():
 	Startup.level_start.connect(_on_level_start)	
 	Startup.level_completed.connect(_on_level_completed)	
@@ -25,8 +27,22 @@ func _ready():
 	
 	restart()
 	
-func _process(delta):
-	pass
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if Input.is_action_just_pressed("move_down"): current_string += "D"
+		if Input.is_action_just_pressed("move_up"): current_string += "U"
+		if Input.is_action_just_pressed("move_left"): current_string += "L"
+		if Input.is_action_just_pressed("move_right"): current_string += "R"
+		
+		current_string = current_string.right(20)
+		
+		if current_string.contains("DDUUDU"):
+			Startup.resetGame()
+			get_tree().change_scene_to_packed(TIMES_UP_SCENE)
+			
+		if current_string.contains("LRDDRUD") and !Startup.save_data["fence_opened"]:
+			Startup.save_data["fence_opened"] = true
+			Sound.good_thing.play()
 	
 func restart():
 	Startup.restart()
@@ -67,6 +83,9 @@ func update():
 			c.update()
 
 func _on_level_changed():
+	
+	Sound.select.play()
+	
 	update()
 
 func _on_level_start(x,y):
@@ -77,10 +96,12 @@ func _on_level_start(x,y):
 	
 	if x == 0 and y == 0:
 		levelStart = load("res://scenes/levels/level_intro.tscn").instantiate()
+	elif x == 4 and y == 4:
+		levelStart = load("res://scenes/levels/level_notes.tscn").instantiate()
 	else:
 		if not level_selector.visible:
 			
-			var levelOptions = ["platformer","pinball","platformer","pinball","platformer","pinball", "pinball", "shop", "note"]
+			var levelOptions = ["platformer","pinball","platformer","pinball","platformer","pinball", "shop", "note"]
 			
 			var minIndex = 0
 			var maxIndex = 0
@@ -98,8 +119,8 @@ func _on_level_start(x,y):
 			level_level_selector_a.updateType()
 			level_level_selector_b.updateType()
 			
-			if y == 0:
-				level_selector.position.y = 200
+			#if y == 0:
+				#level_selector.position.y = 200
 				
 			time_input.updateLimits()
 				
@@ -107,10 +128,6 @@ func _on_level_start(x,y):
 			level_render.get_tree().paused = true
 
 		var res = await Startup.level_selected
-		
-		print("after selected", res)
-		
-		
 		
 		level_selector.visible = false
 		
@@ -130,13 +147,15 @@ func _on_level_start(x,y):
 	Startup.current_running_level = levelStart
 
 	get_tree().root.add_child(levelStart)
+	
+	if x == 4 and y == 4:
+		levelStart.setManual()
+	
 	get_tree().paused = true
 	
 	PhysicsServer2D.set_active(true)
 
 func _on_level_completed():
-	print("done")
-	print(Startup.current_running_level)
 	
 	if Startup.current_running_level.stopwatch:
 		Startup.save_data["time"] = max(0, Startup.save_data["time"] - Startup.current_running_level.stopwatch.get_elapsed())
@@ -151,9 +170,9 @@ func _on_level_completed():
 	get_tree().paused = false
 	
 	if(Startup.save_data["time"] <= 0):
-		print("should restart")
-		print("after startup restart")
-		print("after update")
+		get_tree().change_scene_to_packed(TIMES_UP_SCENE)
+		
+	if Startup.current_running_level.x == 4 and Startup.current_running_level.y == 4:
 		get_tree().change_scene_to_packed(TIMES_UP_SCENE)
 
 
