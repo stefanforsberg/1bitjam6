@@ -42,6 +42,7 @@ func _input(event: InputEvent) -> void:
 			
 		if current_string.contains("LRDDRUD") and !Startup.save_data["fence_opened"]:
 			Startup.save_data["fence_opened"] = true
+			Startup.saveGame()
 			Sound.good_thing.play()
 	
 func restart():
@@ -92,6 +93,8 @@ func _on_level_start(x,y):
 	lastX = x
 	lastY = y
 	
+	Sound.select.play()
+	
 	var levelStart: LevelBase 
 	
 	if x == 0 and y == 0:
@@ -111,16 +114,11 @@ func _on_level_start(x,y):
 			
 			levelOptions.remove_at(levelIndex)
 			
-			print(levelOptions)
-			
 			levelIndex = randi_range(0, levelOptions.size()-1)
 			level_level_selector_b.type = levelOptions[levelIndex]
 			
 			level_level_selector_a.updateType()
 			level_level_selector_b.updateType()
-			
-			#if y == 0:
-				#level_selector.position.y = 200
 				
 			time_input.updateLimits()
 				
@@ -128,6 +126,8 @@ func _on_level_start(x,y):
 			level_render.get_tree().paused = true
 
 		var res = await Startup.level_selected
+		
+		Sound.select.play()
 		
 		level_selector.visible = false
 		
@@ -157,13 +157,20 @@ func _on_level_start(x,y):
 
 func _on_level_completed():
 	
-	if Startup.current_running_level.stopwatch:
+	if "positions" in Startup.current_running_level:
+		Startup.player_positons = Startup.current_running_level.positions
+	
+	if Startup.current_running_level.stopwatch :
 		Startup.save_data["time"] = max(0, Startup.save_data["time"] - Startup.current_running_level.stopwatch.get_elapsed())
 
 		time_input.updateLimits()
 	
 	var x = Startup.current_running_level.x
 	var y = Startup.current_running_level.y
+	
+	Sound.fadeIn(y, y*2)
+	
+	
 	Startup.level_arr[y][x].completed = true
 	update()
 	Startup.current_running_level.queue_free()

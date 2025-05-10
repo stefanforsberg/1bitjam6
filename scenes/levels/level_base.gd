@@ -9,6 +9,5 @@ var stopwatch
 func _ready():
 	stopwatch = STOP_WATCH.instantiate()
 	add_child(stopwatch)
-	print("startin sw", time_limit)
 	stopwatch.set_limit(time_limit)
 	stopwatch.start()

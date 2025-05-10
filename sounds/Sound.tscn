@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1tn6jpci45bd"]
+[gd_scene load_steps=14 format=3 uid="uid://b1tn6jpci45bd"]
 
 [ext_resource type="Script" uid="uid://bf7tbmdshd0ba" path="res://sounds/sound.gd" id="1_ykdpa"]
 [ext_resource type="AudioStream" uid="uid://co7xk6hlhewpl" path="res://sounds/select.wav" id="2_c25pg"]
@@ -8,6 +8,11 @@
 [ext_resource type="AudioStream" uid="uid://cj3qbpbfrxvsg" path="res://sounds/explode.wav" id="6_qky7i"]
 [ext_resource type="AudioStream" uid="uid://cdvlnxb2tsvxu" path="res://sounds/hit.wav" id="7_jk010"]
 [ext_resource type="AudioStream" uid="uid://5ib5hgawph20" path="res://sounds/goodthing.wav" id="8_uy5lm"]
+[ext_resource type="AudioStream" uid="uid://b11w6hxo7wmeb" path="res://sounds/song/1bitjam6 A-Reverb 4-Interference.mp3" id="9_ir4yw"]
+[ext_resource type="AudioStream" uid="uid://cvq6xwlj0iyeu" path="res://sounds/song/1bitjam6 A-Reverb 3-Abstract Tops 120 bpm.mp3" id="10_nbx8d"]
+[ext_resource type="AudioStream" uid="uid://cemj1ra66blfx" path="res://sounds/song/1bitjam6 A-Reverb 1-Serum_x64.mp3" id="11_a5tv4"]
+[ext_resource type="AudioStream" uid="uid://bg7xfuyo3jcoa" path="res://sounds/song/1bitjam6 A-Reverb 2-Serum_x64.mp3" id="12_dxit8"]
+[ext_resource type="AudioStream" uid="uid://c78txqcps2vxs" path="res://sounds/song/1bitjam6 A-Reverb 5-Serum_x64.mp3" id="13_tc01j"]
 
 [node name="Sound" type="Node2D"]
 process_mode = 3
@@ -35,3 +40,18 @@ stream = ExtResource("7_jk010")
 
 [node name="GoodThing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_uy5lm")
+
+[node name="Song1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_a5tv4")
+
+[node name="Song2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_dxit8")
+
+[node name="Song3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_nbx8d")
+
+[node name="Song4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ir4yw")
+
+[node name="Song5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_tc01j")

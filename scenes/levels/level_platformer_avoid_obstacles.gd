@@ -3,6 +3,12 @@ extends LevelBase
 @onready var level_four_door = $LevelFourDoor
 @onready var time_input = $Computer/ComputerArea/TimeInput
 @onready var electricity_on = $Computer/ElectricityOn
+@onready var end_game = $EndGame
+
+const end_game_scene := preload("res://scenes/level_done.tscn")
+@onready var trapdoor = $TrapDoor/Trapdoor
+@onready var pressure = $TrapDoor/Pressure
+@onready var pressure_pressed = $TrapDoor/PressurePressed
 
 @onready var platformer_avoid_obstacles_player = $PlatformerAvoidObstaclesPlayer
 @onready var camera_2d = $Camera2D
@@ -19,6 +25,13 @@ extends LevelBase
 @onready var coin_6 = $Collectables/Coin6
 @onready var coin_7 = $Collectables/Coin7
 @onready var computer_area = $Computer/ComputerArea
+@onready var player_ghost = $PlayerGhost
+
+var player_ghost_position = 0
+
+@onready var fence = $Fence
+
+var positions = []
 
 const message_arr = [
 	["P","A","S","S","W"],
@@ -34,6 +47,9 @@ func _ready():
 	
 	time_input.setLimits()
 	time_input.validPassword.connect(_on_valid_password)
+	
+	if Startup.save_data["fence_opened"]:
+		fence.queue_free()
 	
 	if y == 4:
 		level_four_door.queue_free()
@@ -117,10 +133,36 @@ func _ready():
 		shooter_5.bounces = 8
 
 func _process(delta):
+	
+	positions.append(platformer_avoid_obstacles_player.position)
+	
+	if player_ghost:
+		if player_ghost_position < Startup.player_positons.size():
+			player_ghost.position =  Startup.player_positons[player_ghost_position]
+			player_ghost_position+=1
+		else:
+			player_ghost.queue_free()
+	
 	if platformer_avoid_obstacles_player.position.x > 500 and camera_2d.position.x != 500:
 		camera_2d.position.x += 500
+		shooter.active = false
+		shooter_2.active = false
+		shooter_3.active = false
+		shooter_4.active = false
+		shooter_5.active = false
+		shooter_5.active = false
+		stopwatch._running = false
+		
 	elif platformer_avoid_obstacles_player.position.x < 500 and camera_2d.position.x != 0:
 		camera_2d.position.x -= 500
+		shooter.active = true
+		shooter_2.active = true
+		shooter_3.active = true
+		shooter_4.active = true
+		shooter_5.active = true
+		shooter_5.active = true
+		stopwatch._running = true
+		
 
 func _on_exit_area_body_entered(body):
 	if body is CharacterBody2D:
@@ -149,3 +191,29 @@ func _on_computer_area_detection_body_exited(body):
 func _on_valid_password():
 	electricity_on.visible = true
 	computer_area.visible = false
+
+
+func _on_exit_body_entered(body):
+	if electricity_on.visible:
+		end_game.visible = true
+		Sound.good_thing.play()
+
+var pressure_tween: Tween
+
+func _on_trapdoor_pressure_body_entered(body):
+	
+	if pressure_tween: pressure_tween.stop()
+	pressure.visible = false
+	pressure_pressed.visible = true
+	Sound.good_thing.play()
+	pressure_tween = create_tween()
+	pressure_tween.tween_property(trapdoor, "rotation_degrees", 60, 1)
+
+
+func _on_trapdoor_pressure_body_exited(body):
+	if pressure_tween: pressure_tween.stop()
+	
+	pressure.visible = true
+	pressure_pressed.visible = false
+	pressure_tween = create_tween()
+	pressure_tween.tween_property(trapdoor, "rotation_degrees", 0, 1)

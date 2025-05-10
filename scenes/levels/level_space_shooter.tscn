@@ -19,9 +19,9 @@ radial_accel_min = 5.0
 radial_accel_max = 15.0
 damping_min = 30.969
 damping_max = 54.046
-scale_max = 13.0
+scale_min = 0.0
+scale_max = 4.0
 scale_curve = SubResource("CurveTexture_eunvi")
-color = Color(0.964706, 0.447059, 0.501961, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5oacn"]
 radius = 16.0
@@ -33,10 +33,11 @@ script = ExtResource("1_8q6cx")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 500.0
 offset_bottom = 500.0
-color = Color(0.141862, 0.260082, 0.359842, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="PlayerShip" type="CharacterBody2D" parent="."]
 position = Vector2(265, 233)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_y7v6f")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PlayerShip"]
@@ -51,16 +52,8 @@ process_material = SubResource("ParticleProcessMaterial_8q6cx")
 
 [node name="Polygon2D" type="Polygon2D" parent="PlayerShip"]
 position = Vector2(-1, -2)
-color = Color(0.964706, 0.447059, 0.501961, 1)
 polygon = PackedVector2Array(-12, 17, 22.0022, 2.95299, -11.5477, -14.2344)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerShip"]
 position = Vector2(-1, -1)
 shape = SubResource("CapsuleShape2D_5oacn")
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.964706, 0.447059, 0.501961, 1)
-polygon = PackedVector2Array(-19, 510, 110, 515, 34, 454, 117, 402, 37, 353, 113, 297, 55, 257, 110, 223, 63, 176, 134, 140, 71, 70, 222, 27, 355, 12, 405, 103, 455, 79, 442, 219, 469, 365, 435, 441, 436, 525, 543, 529, 544, -42, -47, -16)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 250)

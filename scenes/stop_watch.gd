@@ -35,6 +35,8 @@ var _alarm_emitted: bool = false  # ensure we only emit once
 func _process(delta: float) -> void:
 	if not _running:
 		return
+		
+		
 	_elapsed += delta
 	var new_sec = int(_elapsed)
 	

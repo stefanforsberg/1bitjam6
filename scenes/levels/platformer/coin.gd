@@ -25,7 +25,7 @@ func reRoll():
 	left_arrow_inverse.visible = false
 	right_arrow_inverse.visible = false
 	
-	type = RandomNumberGenerator.new().randi_range(minRng, maxRng)
+	type = randi_range(minRng, maxRng)
 	
 	if type == 0: up_arrow.visible = true
 	if type == 1: down_arrow.visible = true

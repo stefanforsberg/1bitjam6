@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bg7xfuyo3jcoa"
+path="res://.godot/imported/1bitjam6 A-Reverb 2-Serum_x64.mp3-ec8b68f0f43f0701ab4cacced1d0c949.mp3str"
+
+[deps]
+
+source_file="res://sounds/song/1bitjam6 A-Reverb 2-Serum_x64.mp3"
+dest_files=["res://.godot/imported/1bitjam6 A-Reverb 2-Serum_x64.mp3-ec8b68f0f43f0701ab4cacced1d0c949.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

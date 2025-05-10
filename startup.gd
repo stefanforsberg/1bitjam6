@@ -4,6 +4,8 @@ var saveGameUri = "user://savegame_v1.save"
 
 var save_data = getDefaultSaveData()
 
+var player_positons = []
+
 func getDefaultSaveData():
 	return {
 		"right_arrow_start": 1,
@@ -35,6 +37,7 @@ func _ready():
 func restart():
 	level_arr = []
 	
+	Sound.restart()
 	saveGame()
 	
 	save_data["time"] = save_data["time_start"]

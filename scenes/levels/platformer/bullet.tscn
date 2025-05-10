@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccdcs7y5tx6u2"]
+[gd_scene load_steps=5 format=3 uid="uid://ccdcs7y5tx6u2"]
 
 [ext_resource type="Script" uid="uid://cjd6upx6fe3nk" path="res://scenes/levels/platformer/bullet.gd" id="1_20yy1"]
 [ext_resource type="Texture2D" uid="uid://ci3yxr87ah1te" path="res://images/platformer_bullet.png" id="1_xcm4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jq0f"]
-radius = 4.12311
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20yy1"]
+radius = 5.0
 
 [node name="bullet" type="RigidBody2D"]
 gravity_scale = 0.0
+max_contacts_reported = 2
 script = ExtResource("1_20yy1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -15,3 +19,14 @@ texture = ExtResource("1_xcm4i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8jq0f")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 2
+priority = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_20yy1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

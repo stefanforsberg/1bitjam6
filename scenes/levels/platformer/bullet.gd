@@ -11,28 +11,20 @@ func _ready():
 
 func _physics_process(delta):
 	
-	var velocity = move * delta * speed
-	var col := move_and_collide(velocity)
-	if col:
+	if(position.x > 500):
+		queue_free()
+	else:
+		var velocity = move * delta * speed
+		var col := move_and_collide(velocity)
 		
-		if col.get_collider().name == "PlatformerAvoidObstaclesPlayer":
-			print("YES!!!")
-			Startup.level_completed.emit()
-			
-		if bounce_count > 0:
-			# Perfect elastic bounce: reflect your velocity around the surface normal
-			move = move.bounce(col.get_normal())
-			bounce_count -= 1
-		else:
-			queue_free()
+		if col:
+			if bounce_count > 0:
+				move = move.bounce(col.get_normal())
+				bounce_count -= 1
+			else:
+				queue_free()
 
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#self.position += move*delta*speed
-#
-#
-#func _on_area_2d_body_entered(body):
-	#if bounce_count > 0:
-		#move = -move
-	#else:
-		#self.queue_free()
+
+func _on_area_2d_body_entered(body):
+	if body is CharacterBody2D:
+		Startup.level_completed.emit()

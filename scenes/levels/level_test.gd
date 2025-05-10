@@ -69,6 +69,7 @@ func _process(delta):
 		if aim.points[1].y > -30: power = -1
 	
 	if aiming:
+		
 		aim.rotation_degrees += delta*150
 		
 	if shooting:
@@ -86,6 +87,8 @@ func _on_area_2d_input_event(viewport, event, _shape_idx):
 			if power != 0:
 				power = 0
 				aiming = true
+				
+
 				return
 				
 			aim.visible = false
